@@ -54,6 +54,21 @@ const authOption: NextAuthOptions = {
       }
       return token
     },
+    async redirect({ url, baseUrl }) {
+
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+
+
+      if (url.startsWith(baseUrl)) {
+
+        if (url === baseUrl || url === `${baseUrl}/`) {
+          return `${baseUrl}/dashboard`;
+        }
+        return url;
+      }
+      return baseUrl;
+    }
+
   },
 }
 
